@@ -16,6 +16,8 @@ import org.stirlitz52.temperatureplot.R;
 
 public class MeasureService extends Service implements Runnable {
 
+    MeasureEventList mEvents = new MeasureEventList();
+
     private final String TAG = "MeasureService";
     private final IBinder mBinder = new LocalBinder();
     private final Thread mThread = new Thread(null, this, "MeasureService");
@@ -77,7 +79,7 @@ public class MeasureService extends Service implements Runnable {
                     mListeners.wait(randomWaitTime);
 
                     MeasureEvent measure = getDummyMeasure("therm01");
-
+                    mEvents.container.add(measure);
 
 
                     for (MeasureEventListener listener : mListeners)
