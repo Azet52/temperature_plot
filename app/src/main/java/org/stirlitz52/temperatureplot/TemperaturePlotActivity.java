@@ -10,6 +10,8 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import org.stirlitz52.temperatureplot.measurements.MeasureEvent;
 import org.stirlitz52.temperatureplot.measurements.MeasureEventListener;
@@ -21,10 +23,21 @@ public class TemperaturePlotActivity extends Activity implements MeasureEventLis
 
     public final String TAG = "TemperaturePlotActivity";
 
+    TextView textCurrentTemperature, textAverageTemperature, textSource, textMeasureTime;
+    ImageView imageCurrentTemperature, imageAverageTemperature;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_temperature_plot);
+
+        textCurrentTemperature = (TextView) findViewById(R.id.textMainValue);
+        textAverageTemperature = (TextView) findViewById(R.id.textAverageValue);
+        textSource = (TextView) findViewById(R.id.textSource);
+        textMeasureTime = (TextView) findViewById(R.id.textAtTime);
+
+        imageCurrentTemperature = (ImageView) findViewById(R.id.imageMainValue);
+        imageAverageTemperature = (ImageView) findViewById(R.id.imageAverageValue);
 
         startService(new Intent(this, MeasureService.class));
     }
@@ -87,7 +100,21 @@ public class TemperaturePlotActivity extends Activity implements MeasureEventLis
     }
 
     @Override
-    public void onNewMeasure(MeasureEvent event) {
+    public void onNewMeasure(final MeasureEvent event) {
         Log.i(TAG, "New measure from " + event.source + " taken at " + event.measured_at + " value=" + event.data[0] + event.unit);
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+               textSource.setText(event.source);
+               textMeasureTime.setText("taken at: " + event.measured_at);
+               textCurrentTemperature.setText(event.data[0] + event.unit);
+            }
+        });
+
+
     }
+
+
+
 }

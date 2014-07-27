@@ -76,7 +76,10 @@ public class MeasureService extends Service implements Runnable {
                     int randomWaitTime = mGenerator.nextInt(1000) + 500;
                     mListeners.wait(randomWaitTime);
 
-                    MeasureEvent measure = getDummyMeasure("/therm01/temperature");
+                    MeasureEvent measure = getDummyMeasure("therm01");
+
+
+
                     for (MeasureEventListener listener : mListeners)
                         listener.onNewMeasure(measure);
                 } catch (InterruptedException e) {
