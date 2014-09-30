@@ -10,16 +10,20 @@
         <activity
             android:name=".TemperaturePlotActivity"
             android:label="@string/app_name" >
+        </activity>
+
+        <service android:name=".measurements.MeasureService" >
+        </service>
+
+        <activity
+            android:name=".SurfaceDrawActivity"
+            android:label="@string/title_activity_surface_draw" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <service
-            android:name=".measurements.MeasureService">
-        </service>
     </application>
 
 </manifest>

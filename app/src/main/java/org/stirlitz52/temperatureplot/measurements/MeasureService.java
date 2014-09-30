@@ -111,4 +111,21 @@ public class MeasureService extends Service implements Runnable {
                                 path, new double[] {tempTemperature }, new Date(), "C");
 
     }
+
+    public ArrayList<MeasureEvent> getMeasureEventList (Date date){
+        ArrayList<MeasureEvent> lastMeasureEvents = new  ArrayList<MeasureEvent>();
+        int n = mEvents.container.size();
+        int i = n - 1;
+        while (i >= 0)
+        {
+            if(mEvents.container.get(i).measured_at.compareTo(date) >= 0)
+                break;
+            i--;
+        }
+        while ((i+1) < n) {
+            lastMeasureEvents.add(mEvents.container.get(i));
+            i++;
+        }
+        return lastMeasureEvents;
+    }
 }

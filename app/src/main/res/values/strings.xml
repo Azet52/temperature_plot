@@ -4,7 +4,8 @@
     <string name="app_name">Temperature Plot</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name='measure_service_started'>Measure service has started</string>
-    <string name='measure_service_stopped'>Measure service has stopped</string>
+    <string name="measure_service_started">Measure service has started</string>
+    <string name="measure_service_stopped">Measure service has stopped</string>
+    <string name="title_activity_surface_draw">SurfaceDrawActivity</string>
 
 </resources>
